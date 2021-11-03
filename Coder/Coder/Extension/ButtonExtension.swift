@@ -11,11 +11,9 @@ extension UIButton {
     
     func selectedButton() {
         self.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
-        self.tintColor = .purple
     }
     
     func unselectedButton() {
         self.setImage(UIImage(systemName: "circle"), for: .normal)
-        self.tintColor = .purple
     }
 }

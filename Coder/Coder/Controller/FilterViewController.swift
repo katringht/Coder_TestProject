@@ -20,7 +20,6 @@ class FilterViewController: UIViewController {
 
     @IBAction func closeScreenButton(_ sender: Any) {
         dismiss(animated: true)
-        print("ff")
     }
     
     @IBAction func alphabetFilter(_ sender: Any) {
