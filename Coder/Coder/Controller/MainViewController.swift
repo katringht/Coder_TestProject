@@ -13,6 +13,7 @@ class MainViewController: UIViewController{
     @IBOutlet weak var segmentedView: CustomSegmentedControl!
     @IBOutlet weak var searchField: UITextField!
     let filterButton = UIButton(type: .custom)
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ class MainViewController: UIViewController{
         tableView.delegate = self
         textFieldSetup()
         setUpSegmented()
+        addRefreshControl()
         filterButton.addTarget(self, action: #selector(filterButtonSetup), for: .touchUpInside)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
@@ -35,6 +37,21 @@ class MainViewController: UIViewController{
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let filterVC = storyboard.instantiateViewController(identifier: "FilterViewController")
         present(filterVC, animated: true)
+    }
+    
+    // add refresh control for tableview
+    func addRefreshControl() {
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor(named: "purpleCustom")!
+    }
+    
+    @objc private func refreshData(_ sender: Any) {
+        // Fetch Data
     }
     
     // set up segmented Control
