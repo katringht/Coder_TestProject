@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShowErrorViewController" customModule="Coder" customModuleProvider="target">
+            <connections>
+                <outlet property="errorIcon" destination="otc-K4-H1I" id="obu-DD-m9A"/>
+                <outlet property="errorLabel" destination="nKA-PX-xhh" id="VXE-3c-Bw5"/>
+                <outlet property="errorRefreshButton" destination="Df3-3f-g2h" id="A0s-zB-QNm"/>
+                <outlet property="errorSublable" destination="DSG-fa-5tO" id="o6B-KK-TLj"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flyingsaucer" translatesAutoresizingMaskIntoConstraints="NO" id="otc-K4-H1I">
+                    <rect key="frame" x="177" y="224" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="rPm-CM-gTT"/>
+                        <constraint firstAttribute="height" constant="60" id="sIu-Yh-jC2"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKA-PX-xhh">
+                    <rect key="frame" x="20" y="304" width="374" height="21"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Df3-3f-g2h">
+                    <rect key="frame" x="20" y="393.5" width="374" height="31"/>
+                    <color key="tintColor" name="purpleCustom"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Попробовать снова"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSG-fa-5tO">
+                    <rect key="frame" x="20" y="344" width="374" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="otc-K4-H1I" secondAttribute="trailing" constant="177" id="5Wk-WP-tt0"/>
+                <constraint firstItem="DSG-fa-5tO" firstAttribute="top" secondItem="nKA-PX-xhh" secondAttribute="bottom" constant="19" id="AXL-oo-VPT"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DSG-fa-5tO" secondAttribute="trailing" constant="20" id="Bbr-v4-1WU"/>
+                <constraint firstItem="nKA-PX-xhh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Epl-za-Z4T"/>
+                <constraint firstItem="DSG-fa-5tO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="GFA-xq-yJs"/>
+                <constraint firstItem="Df3-3f-g2h" firstAttribute="top" secondItem="DSG-fa-5tO" secondAttribute="bottom" constant="29" id="HhC-wJ-JSo"/>
+                <constraint firstItem="otc-K4-H1I" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Jnr-Qv-zbs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nKA-PX-xhh" secondAttribute="trailing" constant="20" id="Lx1-X8-Qns"/>
+                <constraint firstItem="otc-K4-H1I" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="180" id="VPe-4A-ghH"/>
+                <constraint firstItem="Df3-3f-g2h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="efH-iE-S1Y"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Df3-3f-g2h" secondAttribute="trailing" constant="20" id="q5G-fi-fuN"/>
+                <constraint firstItem="otc-K4-H1I" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="177" id="qcW-lq-qkp"/>
+                <constraint firstItem="nKA-PX-xhh" firstAttribute="top" secondItem="otc-K4-H1I" secondAttribute="bottom" constant="20" id="xVY-da-Daj"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="75.669642857142847"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="flyingsaucer" width="28.5" height="28"/>
+        <namedColor name="purpleCustom">
+            <color red="0.34900000691413879" green="0.19599999487400055" blue="0.93300002813339233" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
