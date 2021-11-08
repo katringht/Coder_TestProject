@@ -12,6 +12,7 @@ class CustomSegmentedControl: UIView {
     var buttonTitles: [String]!
     private var buttons : [UIButton]!
     private var selectorView: UIView!
+    var tableView: UITableView!
     
     var textColor: UIColor = .gray
     var selectorViewColor: UIColor = UIColor(named: "purpleCustom")!
@@ -38,6 +39,8 @@ class CustomSegmentedControl: UIView {
                 btn.setTitleColor(textColor, for: .normal)
             }
         }
+        MainViewController.nSelectedSegmentIndex = sender.tag
+        tableView.reloadData()
     }
     
     // create a Button
@@ -49,7 +52,7 @@ class CustomSegmentedControl: UIView {
         
         for (i, buttonTitle) in buttonTitles.enumerated() {
             let button = UIButton(type: .system)
-            button.setTitle(buttonTitle, for: .normal)
+            button.setTitle(buttonTitle.replacingOccurrences(of: "_", with: " "), for: .normal)
             button.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
             button.setTitleColor(textColor, for: .normal)
             button.tag = i

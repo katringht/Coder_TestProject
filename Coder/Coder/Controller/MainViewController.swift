@@ -15,6 +15,8 @@ class MainViewController: UIViewController{
     let filterButton = UIButton(type: .custom)
     private let refreshControl = UIRefreshControl()
     let service = NetworkingService.shared
+    static var nSelectedSegmentIndex : Int = 0
+    let titles = ["Все", "IOS", "Android", "Design", "Analytics", "Management",  "QA", "Back_office", "Frontend", "HR", "PR", "Support", "Backend"]
     var users = [User]() {
         didSet {
             DispatchQueue.main.async {
@@ -39,11 +41,11 @@ class MainViewController: UIViewController{
         updateView()
     }
     
+// MARK: update view
     func updateView() {
         service.getDataWith { [weak self] result in
             switch result {
             case .Success(let data):
-//                let filtred = data.filter { $0.department == "ios"}
                 self?.users = data.sorted(by: { $0.lastName < $1.lastName})
             case .Error(let message):
                 DispatchQueue.main.async {
@@ -81,9 +83,8 @@ class MainViewController: UIViewController{
     
 // MARK: set up segmented Control
     func setUpSegmented() {
-        let titles = ["Все", "Designers", "Analysts", "Managers", "IOS", "Android", "QA", "Back Office", "Frontend", "HR", "PR", "Support", "Backend"]
         segmentedView.buttonTitles = titles
-        
+        segmentedView.tableView = tableView
     }
     
 // MARK: Text Field Settings
@@ -108,7 +109,6 @@ class MainViewController: UIViewController{
         searchField.rightViewMode = .unlessEditing
         searchField.rightView = iconContainerView2
         searchField.clearButtonMode = .whileEditing
-        
     }
 }
 
@@ -116,19 +116,31 @@ class MainViewController: UIViewController{
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
-
+        if MainViewController.nSelectedSegmentIndex == 0 {
+            return users.count
+        } else {
+            let category = users.filter { $0.department == titles[MainViewController.nSelectedSegmentIndex].lowercased()}
+            return category.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
-        
-        let user = users[indexPath.row]
-        cell.userNameLabel.text = "\(user.firstName) \(user.lastName)"
-        cell.userTagLabel.text = user.userTag.lowercased()
-        cell.userDepartmentLabel.text = user.position
-        cell.userImageView.loadImageUsingUrl(urlString: user.avatarUrl)
-        
+        let user: User
+        if MainViewController.nSelectedSegmentIndex == 0 {
+            user = users[indexPath.row]
+            cell.userNameLabel.text = "\(user.firstName) \(user.lastName)"
+            cell.userTagLabel.text = user.userTag.lowercased()
+            cell.userDepartmentLabel.text = user.position
+            cell.userImageView.loadImageUsingUrl(urlString: user.avatarUrl)
+        } else {
+            let category = users.filter { $0.department == titles[MainViewController.nSelectedSegmentIndex].lowercased() }
+            user = category[indexPath.row]
+            cell.userNameLabel.text = "\(user.firstName) \(user.lastName)"
+            cell.userTagLabel.text = user.userTag.lowercased()
+            cell.userDepartmentLabel.text = user.position
+            cell.userImageView.loadImageUsingUrl(urlString: user.avatarUrl)
+        }
         return cell
     }
 }
