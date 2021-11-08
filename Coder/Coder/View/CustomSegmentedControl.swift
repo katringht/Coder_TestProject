@@ -16,7 +16,7 @@ class CustomSegmentedControl: UIView {
     var textColor: UIColor = .gray
     var selectorViewColor: UIColor = UIColor(named: "purpleCustom")!
     var selectorTextColor: UIColor = .black
-
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         updateView()
@@ -47,11 +47,12 @@ class CustomSegmentedControl: UIView {
         buttons.removeAll()
         subviews.forEach({$0.removeFromSuperview()})
         
-        for buttonTitle in buttonTitles {
+        for (i, buttonTitle) in buttonTitles.enumerated() {
             let button = UIButton(type: .system)
             button.setTitle(buttonTitle, for: .normal)
             button.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
             button.setTitleColor(textColor, for: .normal)
+            button.tag = i
             buttons.append(button)
         }
         buttons[0].addBottomBorderWithColor(color: selectorViewColor, width: 80, y: frame.size.height)

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		21046C6C27303D9600A13903 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21046C6B27303D9600A13903 /* FilterViewController.swift */; };
 		21046C6F273046B900A13903 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21046C6E273046B900A13903 /* ButtonExtension.swift */; };
+		211728F82739317E00DDDA40 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211728F72739317E00DDDA40 /* ImageViewExtension.swift */; };
 		2118DA3D2731BC2D00BAD1DE /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2118DA3C2731BC2D00BAD1DE /* UIViewExtension.swift */; };
 		211E5050272FF67E00E9C9B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E504F272FF67E00E9C9B0 /* AppDelegate.swift */; };
 		211E5052272FF67E00E9C9B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E5051272FF67E00E9C9B0 /* SceneDelegate.swift */; };
@@ -19,6 +20,9 @@
 		21253D9A2732D68F00F469BA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21253D992732D68F00F469BA /* DetailViewController.swift */; };
 		21253D9C2732D6B100F469BA /* InformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21253D9B2732D6B100F469BA /* InformationTableViewCell.swift */; };
 		21253D9F2732D96400F469BA /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21253D9E2732D96400F469BA /* UserInfoModel.swift */; };
+		213BAC3127381777007E5832 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BAC3027381777007E5832 /* Networking.swift */; };
+		213BAC33273820E3007E5832 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BAC32273820E3007E5832 /* Result.swift */; };
+		213BAC3527382BEE007E5832 /* UsersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BAC3427382BEE007E5832 /* UsersModel.swift */; };
 		21879DE92732AF9300DAA9F0 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21879DE82732AF9300DAA9F0 /* UserTableViewCell.swift */; };
 		21A488142736657D00CDA8CC /* ShowErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A488122736657D00CDA8CC /* ShowErrorViewController.swift */; };
 		21A488152736657D00CDA8CC /* ShowErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A488132736657D00CDA8CC /* ShowErrorViewController.xib */; };
@@ -28,6 +32,7 @@
 /* Begin PBXFileReference section */
 		21046C6B27303D9600A13903 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		21046C6E273046B900A13903 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		211728F72739317E00DDDA40 /* ImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
 		2118DA3C2731BC2D00BAD1DE /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		211E504C272FF67E00E9C9B0 /* Coder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		211E504F272FF67E00E9C9B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +45,9 @@
 		21253D992732D68F00F469BA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		21253D9B2732D6B100F469BA /* InformationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTableViewCell.swift; sourceTree = "<group>"; };
 		21253D9E2732D96400F469BA /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
+		213BAC3027381777007E5832 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		213BAC32273820E3007E5832 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		213BAC3427382BEE007E5832 /* UsersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersModel.swift; sourceTree = "<group>"; };
 		21879DE82732AF9300DAA9F0 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		21A488122736657D00CDA8CC /* ShowErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowErrorViewController.swift; sourceTree = "<group>"; };
 		21A488132736657D00CDA8CC /* ShowErrorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowErrorViewController.xib; sourceTree = "<group>"; };
@@ -62,6 +70,7 @@
 			children = (
 				21046C6E273046B900A13903 /* ButtonExtension.swift */,
 				2118DA3C2731BC2D00BAD1DE /* UIViewExtension.swift */,
+				211728F72739317E00DDDA40 /* ImageViewExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -85,6 +94,7 @@
 		211E504E272FF67E00E9C9B0 /* Coder */ = {
 			isa = PBXGroup;
 			children = (
+				219D13C42736B0E5000358DA /* Networking */,
 				21253D9D2732D95000F469BA /* Model */,
 				21046C6D2730469E00A13903 /* Extension */,
 				211E5065272FF6DF00E9C9B0 /* View */,
@@ -133,8 +143,18 @@
 			isa = PBXGroup;
 			children = (
 				21253D9E2732D96400F469BA /* UserInfoModel.swift */,
+				213BAC32273820E3007E5832 /* Result.swift */,
+				213BAC3427382BEE007E5832 /* UsersModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		219D13C42736B0E5000358DA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				213BAC3027381777007E5832 /* Networking.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +173,8 @@
 			dependencies = (
 			);
 			name = Coder;
+			packageProductDependencies = (
+			);
 			productName = Coder;
 			productReference = 211E504C272FF67E00E9C9B0 /* Coder.app */;
 			productType = "com.apple.product-type.application";
@@ -181,6 +203,9 @@
 				Base,
 			);
 			mainGroup = 211E5043272FF67D00E9C9B0;
+			packageReferences = (
+				219D13C12736A206000358DA /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 211E504D272FF67E00E9C9B0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -212,14 +237,18 @@
 				21253D9F2732D96400F469BA /* UserInfoModel.swift in Sources */,
 				211E5054272FF67E00E9C9B0 /* MainViewController.swift in Sources */,
 				21A488142736657D00CDA8CC /* ShowErrorViewController.swift in Sources */,
+				213BAC3127381777007E5832 /* Networking.swift in Sources */,
+				213BAC33273820E3007E5832 /* Result.swift in Sources */,
 				211E5050272FF67E00E9C9B0 /* AppDelegate.swift in Sources */,
 				21253D9C2732D6B100F469BA /* InformationTableViewCell.swift in Sources */,
 				21046C6F273046B900A13903 /* ButtonExtension.swift in Sources */,
+				213BAC3527382BEE007E5832 /* UsersModel.swift in Sources */,
 				21253D9A2732D68F00F469BA /* DetailViewController.swift in Sources */,
 				21046C6C27303D9600A13903 /* FilterViewController.swift in Sources */,
 				21879DE92732AF9300DAA9F0 /* UserTableViewCell.swift in Sources */,
 				2118DA3D2731BC2D00BAD1DE /* UIViewExtension.swift in Sources */,
 				211E5052272FF67E00E9C9B0 /* SceneDelegate.swift in Sources */,
+				211728F82739317E00DDDA40 /* ImageViewExtension.swift in Sources */,
 				21C4C84227315FFD00ED001D /* CustomSegmentedControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +471,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		219D13C12736A206000358DA /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 211E5044272FF67D00E9C9B0 /* Project object */;
 }

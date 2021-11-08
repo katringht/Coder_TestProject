@@ -14,6 +14,14 @@ class MainViewController: UIViewController{
     @IBOutlet weak var searchField: UITextField!
     let filterButton = UIButton(type: .custom)
     private let refreshControl = UIRefreshControl()
+    let service = NetworkingService.shared
+    var users = [User]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +35,22 @@ class MainViewController: UIViewController{
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
         tapGesture.cancelsTouchesInView = false
+        
+        updateView()
+    }
+    
+    func updateView() {
+        service.getDataWith { [weak self] result in
+            switch result {
+            case .Success(let data):
+//                let filtred = data.filter { $0.department == "ios"}
+                self?.users = data.sorted(by: { $0.lastName < $1.lastName})
+            case .Error(let message):
+                DispatchQueue.main.async {
+                    print(message)
+                }
+            }
+        }
     }
     
     @objc func hideKeyboard() {
@@ -39,7 +63,7 @@ class MainViewController: UIViewController{
         present(filterVC, animated: true)
     }
     
-    // add refresh control for tableview
+// MARK: refresh control for tableview
     func addRefreshControl() {
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
@@ -51,16 +75,18 @@ class MainViewController: UIViewController{
     }
     
     @objc private func refreshData(_ sender: Any) {
-        // Fetch Data
+        updateView()
+        refreshControl.endRefreshing()
     }
     
-    // set up segmented Control
+// MARK: set up segmented Control
     func setUpSegmented() {
         let titles = ["Все", "Designers", "Analysts", "Managers", "IOS", "Android", "QA", "Back Office", "Frontend", "HR", "PR", "Support", "Backend"]
         segmentedView.buttonTitles = titles
+        
     }
     
-    // MARK: Text Field Settings
+// MARK: Text Field Settings
     func textFieldSetup() {
         searchField.layer.cornerRadius = 10
         // left view
@@ -90,11 +116,19 @@ class MainViewController: UIViewController{
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return users.count
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
+        
+        let user = users[indexPath.row]
+        cell.userNameLabel.text = "\(user.firstName) \(user.lastName)"
+        cell.userTagLabel.text = user.userTag.lowercased()
+        cell.userDepartmentLabel.text = user.position
+        cell.userImageView.loadImageUsingUrl(urlString: user.avatarUrl)
+        
         return cell
     }
 }
@@ -108,7 +142,13 @@ extension MainViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC = storyboard.instantiateViewController(identifier: "DetailViewController") as! DetailViewController
-
+        let user = users[indexPath.row]
+        detailVC.username = "\(user.firstName) \(user.lastName)"
+        detailVC.usertag = user.userTag.lowercased()
+        detailVC.imageurl = user.avatarUrl
+        detailVC.userposition = user.position
+        detailVC.phoneInfo = user.phone.replacingOccurrences(of: "-", with: "")
+        detailVC.birthdayInfo = user.birthday.replacingOccurrences(of: "-", with: ".")
         show(detailVC, sender: self)
     }
 }
