@@ -27,6 +27,7 @@
 		21A488142736657D00CDA8CC /* ShowErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A488122736657D00CDA8CC /* ShowErrorViewController.swift */; };
 		21A488152736657D00CDA8CC /* ShowErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A488132736657D00CDA8CC /* ShowErrorViewController.xib */; };
 		21C4C84227315FFD00ED001D /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4C84127315FFD00ED001D /* CustomSegmentedControl.swift */; };
+		21FEC36C273ABE70000D960F /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 21FEC36B273ABE70000D960F /* SkeletonView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21FEC36C273ABE70000D960F /* SkeletonView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +176,7 @@
 			);
 			name = Coder;
 			packageProductDependencies = (
+				21FEC36B273ABE70000D960F /* SkeletonView */,
 			);
 			productName = Coder;
 			productReference = 211E504C272FF67E00E9C9B0 /* Coder.app */;
@@ -204,7 +207,7 @@
 			);
 			mainGroup = 211E5043272FF67D00E9C9B0;
 			packageReferences = (
-				219D13C12736A206000358DA /* XCRemoteSwiftPackageReference "Alamofire" */,
+				21FEC36A273ABE70000D960F /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 211E504D272FF67E00E9C9B0 /* Products */;
 			projectDirPath = "";
@@ -473,15 +476,23 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		219D13C12736A206000358DA /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		21FEC36A273ABE70000D960F /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		21FEC36B273ABE70000D960F /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 21FEC36A273ABE70000D960F /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 211E5044272FF67D00E9C9B0 /* Project object */;
 }

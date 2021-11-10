@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SkeletonView
 
-class MainViewController: UIViewController{
-
+class MainViewController: UIViewController, UITextFieldDelegate{
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedView: CustomSegmentedControl!
     @IBOutlet weak var searchField: UITextField!
@@ -17,6 +18,8 @@ class MainViewController: UIViewController{
     let service = NetworkingService.shared
     static var nSelectedSegmentIndex : Int = 0
     let titles = ["Все", "IOS", "Android", "Design", "Analytics", "Management",  "QA", "Back_office", "Frontend", "HR", "PR", "Support", "Backend"]
+    var filteredUsers = [User]()
+    var isSearching = false
     var users = [User]() {
         didSet {
             DispatchQueue.main.async {
@@ -24,24 +27,29 @@ class MainViewController: UIViewController{
             }
         }
     }
+    var dataWasLoaded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        searchField.delegate = self
         textFieldSetup()
         setUpSegmented()
         addRefreshControl()
         filterButton.addTarget(self, action: #selector(filterButtonSetup), for: .touchUpInside)
-        
+        searchField.addTarget(self, action: #selector(searchRecord), for: .editingChanged)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
         tapGesture.cancelsTouchesInView = false
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        dataWasLoaded = true
         updateView()
     }
     
-// MARK: update view
+    // MARK: Update view
     func updateView() {
         service.getDataWith { [weak self] result in
             switch result {
@@ -58,14 +66,14 @@ class MainViewController: UIViewController{
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
-    
+    // MARK: Filter set up
     @objc func filterButtonSetup() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let filterVC = storyboard.instantiateViewController(identifier: "FilterViewController")
         present(filterVC, animated: true)
     }
     
-// MARK: refresh control for tableview
+    // MARK: Refresh control for tableview
     func addRefreshControl() {
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
@@ -81,13 +89,42 @@ class MainViewController: UIViewController{
         refreshControl.endRefreshing()
     }
     
-// MARK: set up segmented Control
+    // MARK: Set up segmented Control
     func setUpSegmented() {
         segmentedView.buttonTitles = titles
         segmentedView.tableView = tableView
     }
     
-// MARK: Text Field Settings
+    // MARK: Search Text Field Settings
+    @objc func searchRecord(sender: UITextField) {
+        self.filteredUsers.removeAll()
+        let searchData = searchField.text?.count
+        if searchData != 0 {
+            isSearching = true
+            var i = 0
+            for user in users {
+                if let userToSearch = searchField.text {
+                    let range = user.firstName.lowercased().range(of: userToSearch, options: .caseInsensitive, range: nil, locale: nil)
+                    let rangeLastName = user.lastName.lowercased().range(of: userToSearch, options: .caseInsensitive, range: nil, locale: nil)
+                    let rangeUserTag = user.userTag.lowercased().range(of: userToSearch, options: .caseInsensitive, range: nil, locale: nil)
+                    if range != nil || rangeLastName != nil || rangeUserTag != nil {
+                        self.filteredUsers.append(user)
+                    }
+                }
+                i += 1
+            }
+        } else {
+            filteredUsers = users
+            isSearching = false
+        }
+        tableView.reloadData()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchField.resignFirstResponder()
+        return true
+    }
+    
     func textFieldSetup() {
         searchField.layer.cornerRadius = 10
         // left view
@@ -114,32 +151,60 @@ class MainViewController: UIViewController{
 
 // MARK: - Table view extensions
 
-extension MainViewController: UITableViewDataSource {
+extension MainViewController: SkeletonTableViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return UserTableViewCell.cellID
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if MainViewController.nSelectedSegmentIndex == 0 {
-            return users.count
+        if dataWasLoaded == false {
+            return 10
         } else {
-            let category = users.filter { $0.department == titles[MainViewController.nSelectedSegmentIndex].lowercased()}
-            return category.count
+            if MainViewController.nSelectedSegmentIndex == 0 {
+                if isSearching {
+                    return filteredUsers.count
+                } else {
+                    return users.count
+                }
+            } else {
+                if isSearching {
+                    let category = filteredUsers.filter { $0.department == titles[MainViewController.nSelectedSegmentIndex].lowercased()}
+                    return category.count
+                } else {
+                    let category = users.filter { $0.department == titles[MainViewController.nSelectedSegmentIndex].lowercased()}
+                    return category.count
+                }
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.cellID, for: indexPath) as! UserTableViewCell
+        cell.isSkeletonable = true
+        cell.showAnimatedGradientSkeleton()
         let user: User
-        if MainViewController.nSelectedSegmentIndex == 0 {
-            user = users[indexPath.row]
+        if dataWasLoaded == true {
+            cell.hideSkeleton()
+            cell.stopSkeletonAnimation()
+            if MainViewController.nSelectedSegmentIndex == 0 {
+                if isSearching {
+                    user = self.filteredUsers[indexPath.row]
+                } else {
+                    user = self.users[indexPath.row]
+                }
+            } else {
+                if isSearching {
+                    let category = self.filteredUsers.filter { $0.department == self.titles[MainViewController.nSelectedSegmentIndex].lowercased() }
+                    user = category[indexPath.row]
+                } else {
+                    let category = self.users.filter { $0.department == self.titles[MainViewController.nSelectedSegmentIndex].lowercased() }
+                    user = category[indexPath.row]
+                }
+            }
             cell.userNameLabel.text = "\(user.firstName) \(user.lastName)"
             cell.userTagLabel.text = user.userTag.lowercased()
             cell.userDepartmentLabel.text = user.position
             cell.userImageView.loadImageUsingUrl(urlString: user.avatarUrl)
-        } else {
-            let category = users.filter { $0.department == titles[MainViewController.nSelectedSegmentIndex].lowercased() }
-            user = category[indexPath.row]
-            cell.userNameLabel.text = "\(user.firstName) \(user.lastName)"
-            cell.userTagLabel.text = user.userTag.lowercased()
-            cell.userDepartmentLabel.text = user.position
-            cell.userImageView.loadImageUsingUrl(urlString: user.avatarUrl)
+            
         }
         return cell
     }
@@ -154,7 +219,12 @@ extension MainViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC = storyboard.instantiateViewController(identifier: "DetailViewController") as! DetailViewController
-        let user = users[indexPath.row]
+        let user: User
+        if isSearching {
+            user = filteredUsers[indexPath.row]
+        } else {
+            user = users[indexPath.row]
+        }
         detailVC.username = "\(user.firstName) \(user.lastName)"
         detailVC.usertag = user.userTag.lowercased()
         detailVC.imageurl = user.avatarUrl

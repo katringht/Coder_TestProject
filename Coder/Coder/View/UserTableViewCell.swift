@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class UserTableViewCell: UITableViewCell {
 
@@ -13,6 +14,9 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var userDepartmentLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
+    
+    static let cellID = "UserCell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         userImageView.layer.cornerRadius = 40
@@ -23,5 +27,4 @@ class UserTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }
