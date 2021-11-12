@@ -14,8 +14,16 @@ class FilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        alphabetFilterButton.selectedButton()
-        birthdayFilterButton.unselectedButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !UserDefaults.standard.bool(forKey: "FILTER") {
+            alphabetFilterButton.selectedButton()
+            birthdayFilterButton.unselectedButton()
+        } else {
+            alphabetFilterButton.unselectedButton()
+            birthdayFilterButton.selectedButton()
+        }
     }
 
     @IBAction func closeScreenButton(_ sender: Any) {
@@ -23,12 +31,18 @@ class FilterViewController: UIViewController {
     }
     
     @IBAction func alphabetFilter(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "FILTER")
         alphabetFilterButton.selectedButton()
         birthdayFilterButton.unselectedButton()
+        NotificationCenter.default.post(name: .reload, object: nil)
+        self.dismiss(animated: true)
     }
     
     @IBAction func birthdayFilter(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: "FILTER")
         alphabetFilterButton.unselectedButton()
         birthdayFilterButton.selectedButton()
+        NotificationCenter.default.post(name: .reload, object: nil)
+        self.dismiss(animated: true)
     }
 }

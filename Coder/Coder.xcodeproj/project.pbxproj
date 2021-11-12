@@ -23,9 +23,11 @@
 		213BAC3127381777007E5832 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BAC3027381777007E5832 /* Networking.swift */; };
 		213BAC33273820E3007E5832 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BAC32273820E3007E5832 /* Result.swift */; };
 		213BAC3527382BEE007E5832 /* UsersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BAC3427382BEE007E5832 /* UsersModel.swift */; };
+		21665442273D47B600AB3E71 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21665441273D47B600AB3E71 /* NotificationExtension.swift */; };
+		218439F6273D79A1005540FF /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218439F5273D79A1005540FF /* ErrorView.swift */; };
 		21879DE92732AF9300DAA9F0 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21879DE82732AF9300DAA9F0 /* UserTableViewCell.swift */; };
 		21A488142736657D00CDA8CC /* ShowErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A488122736657D00CDA8CC /* ShowErrorViewController.swift */; };
-		21A488152736657D00CDA8CC /* ShowErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A488132736657D00CDA8CC /* ShowErrorViewController.xib */; };
+		21A488152736657D00CDA8CC /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A488132736657D00CDA8CC /* ErrorView.xib */; };
 		21C4C84227315FFD00ED001D /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4C84127315FFD00ED001D /* CustomSegmentedControl.swift */; };
 		21FEC36C273ABE70000D960F /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 21FEC36B273ABE70000D960F /* SkeletonView */; };
 /* End PBXBuildFile section */
@@ -49,9 +51,11 @@
 		213BAC3027381777007E5832 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		213BAC32273820E3007E5832 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		213BAC3427382BEE007E5832 /* UsersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersModel.swift; sourceTree = "<group>"; };
+		21665441273D47B600AB3E71 /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
+		218439F5273D79A1005540FF /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		21879DE82732AF9300DAA9F0 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		21A488122736657D00CDA8CC /* ShowErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowErrorViewController.swift; sourceTree = "<group>"; };
-		21A488132736657D00CDA8CC /* ShowErrorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowErrorViewController.xib; sourceTree = "<group>"; };
+		21A488132736657D00CDA8CC /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		21C4C84127315FFD00ED001D /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +77,7 @@
 				21046C6E273046B900A13903 /* ButtonExtension.swift */,
 				2118DA3C2731BC2D00BAD1DE /* UIViewExtension.swift */,
 				211728F72739317E00DDDA40 /* ImageViewExtension.swift */,
+				21665441273D47B600AB3E71 /* NotificationExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -126,7 +131,7 @@
 			children = (
 				211E5055272FF67E00E9C9B0 /* Main.storyboard */,
 				211E505A272FF67F00E9C9B0 /* LaunchScreen.storyboard */,
-				21A488132736657D00CDA8CC /* ShowErrorViewController.xib */,
+				21A488132736657D00CDA8CC /* ErrorView.xib */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				21C4C84127315FFD00ED001D /* CustomSegmentedControl.swift */,
 				21879DE82732AF9300DAA9F0 /* UserTableViewCell.swift */,
 				21253D9B2732D6B100F469BA /* InformationTableViewCell.swift */,
+				218439F5273D79A1005540FF /* ErrorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -225,7 +231,7 @@
 			files = (
 				211E505C272FF67F00E9C9B0 /* LaunchScreen.storyboard in Resources */,
 				211E5059272FF67F00E9C9B0 /* Assets.xcassets in Resources */,
-				21A488152736657D00CDA8CC /* ShowErrorViewController.xib in Resources */,
+				21A488152736657D00CDA8CC /* ErrorView.xib in Resources */,
 				211E5057272FF67E00E9C9B0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,6 +249,8 @@
 				213BAC3127381777007E5832 /* Networking.swift in Sources */,
 				213BAC33273820E3007E5832 /* Result.swift in Sources */,
 				211E5050272FF67E00E9C9B0 /* AppDelegate.swift in Sources */,
+				21665442273D47B600AB3E71 /* NotificationExtension.swift in Sources */,
+				218439F6273D79A1005540FF /* ErrorView.swift in Sources */,
 				21253D9C2732D6B100F469BA /* InformationTableViewCell.swift in Sources */,
 				21046C6F273046B900A13903 /* ButtonExtension.swift in Sources */,
 				213BAC3527382BEE007E5832 /* UsersModel.swift in Sources */,

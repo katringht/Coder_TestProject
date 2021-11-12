@@ -28,6 +28,11 @@ class MainViewController: UIViewController, UITextFieldDelegate{
         }
     }
     var dataWasLoaded = false
+    private lazy var errorView: ErrorView = {
+        let errorV = Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)?.first as? ErrorView
+        errorV?.set(title: "Мы никого не нашли", subtitle: "Попробуй скорректировать запрос", myerrorIcon: "magnifyingglass", button: false)
+        return errorV!
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,16 +42,22 @@ class MainViewController: UIViewController, UITextFieldDelegate{
         textFieldSetup()
         setUpSegmented()
         addRefreshControl()
+        updateView()
+        
         filterButton.addTarget(self, action: #selector(filterButtonSetup), for: .touchUpInside)
         searchField.addTarget(self, action: #selector(searchRecord), for: .editingChanged)
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
         tapGesture.cancelsTouchesInView = false
+        
+        UserDefaults.standard.set(false, forKey: "FILTER")
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: .reload, object: nil)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         dataWasLoaded = true
-        updateView()
     }
     
     // MARK: Update view
@@ -54,23 +65,52 @@ class MainViewController: UIViewController, UITextFieldDelegate{
         service.getDataWith { [weak self] result in
             switch result {
             case .Success(let data):
-                self?.users = data.sorted(by: { $0.lastName < $1.lastName})
+                if !UserDefaults.standard.bool(forKey: "FILTER") {
+                    self?.users = data.sorted(by: { $0.lastName < $1.lastName})
+                } else {
+                    self?.users = data.sorted(by: { (self?.daysUntil(birthday: $0.birthday))! < (self?.daysUntil(birthday: $1.birthday))!})
+                }
             case .Error(let message):
                 DispatchQueue.main.async {
+                    self?.showError()
                     print(message)
                 }
             }
         }
     }
     
+    @objc func reloadTableData(_ notification: Notification) {
+        updateView()
+    }
+    
+    func showError() {
+        let vc = ShowErrorViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
+    
     // MARK: Filter set up
     @objc func filterButtonSetup() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let filterVC = storyboard.instantiateViewController(identifier: "FilterViewController")
         present(filterVC, animated: true)
+    }
+    
+    // MARK: Date filter
+    func daysUntil(birthday: String) -> Int {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        let formatBirth = formatter.date(from: birthday)
+        let cal = Calendar.current
+        let today = cal.startOfDay(for: Date())
+        let date = cal.startOfDay(for: formatBirth!)
+        let components = cal.dateComponents([.day, .month], from: date)
+        let nextDate = cal.nextDate(after: today, matching: components, matchingPolicy: .nextTimePreservingSmallerComponents)
+        return cal.dateComponents([.day], from: today, to: nextDate ?? today).day ?? 0
     }
     
     // MARK: Refresh control for tableview
@@ -118,6 +158,14 @@ class MainViewController: UIViewController, UITextFieldDelegate{
             isSearching = false
         }
         tableView.reloadData()
+        
+        if filteredUsers.count == 0 {
+            errorView.center = tableView.center
+            tableView.backgroundView = errorView
+
+        } else {
+            tableView.backgroundView = nil
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -232,5 +280,9 @@ extension MainViewController: UITableViewDelegate {
         detailVC.phoneInfo = user.phone.replacingOccurrences(of: "-", with: "")
         detailVC.birthdayInfo = user.birthday.replacingOccurrences(of: "-", with: ".")
         show(detailVC, sender: self)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
 }

@@ -41,14 +41,13 @@ class DetailViewController: UIViewController {
         infoUserImageView.loadImageUsingUrl(urlString: imageurl!)
         infoUserImageView.layer.cornerRadius = 40
     }
-    
+
     func setUpTableViewCell() {
         let phoneImage = UIImage(systemName: "phone")
         let starImage = UIImage(systemName: "star")
         let birthday = dateFormatter.date(from: birthdayInfo!)
         let timeInterval = birthday?.timeIntervalSinceNow
         let age = abs(Int(timeInterval! / 31556926.0))
-        
         info = [InfoUser(icon: starImage!, mainInfo: birthdayInfo!, extraInfo: "\(age) года"), InfoUser(icon: phoneImage!, mainInfo: phoneInfo!, extraInfo: "")]
     }
     

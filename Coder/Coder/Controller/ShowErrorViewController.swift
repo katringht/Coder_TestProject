@@ -9,25 +9,21 @@ import UIKit
 
 class ShowErrorViewController: UIViewController {
 
-    @IBOutlet weak var errorRefreshButton: UIButton!
-    @IBOutlet weak var errorSublable: UILabel!
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var errorIcon: UIImageView!
+    private lazy var errorView: ErrorView = {
+        let errorV = Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)?.first as? ErrorView
+        errorV?.set(title: "Какой-то сверхразум все сломал", subtitle: "Постараемся быстро починить", myerrorIcon: "flyingsaucer", button: true)
+        return errorV!
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        view.addSubview(errorView)
+        errorView.center = view.center
+        errorView.errorRefreshButton.addTarget(self, action: #selector(tryEgainButton(_:)), for: .touchUpInside)
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func tryEgainButton(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
-    */
-
 }
