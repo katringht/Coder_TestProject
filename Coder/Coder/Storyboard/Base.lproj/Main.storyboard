@@ -82,7 +82,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Department" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVF-os-gJj">
-                                                    <rect key="frame" x="115" y="60.5" width="259" height="20.5"/>
+                                                    <rect key="frame" x="115" y="61" width="229" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -90,16 +90,27 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkI-DW-Svn">
+                                                    <rect key="frame" x="364.5" y="43" width="39.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="VhG-sH-98D" firstAttribute="leading" secondItem="x3E-3T-0wf" secondAttribute="trailing" constant="15" id="1m8-3k-l9i"/>
+                                                <constraint firstAttribute="bottom" secondItem="SkI-DW-Svn" secondAttribute="bottom" constant="43" id="E7v-oT-ilg"/>
+                                                <constraint firstItem="eVF-os-gJj" firstAttribute="top" secondItem="qhi-KD-LCF" secondAttribute="bottom" constant="14.5" id="FC6-n0-ZRJ"/>
+                                                <constraint firstItem="SkI-DW-Svn" firstAttribute="top" secondItem="8vl-HL-E6z" secondAttribute="top" constant="43" id="Gsz-Ul-c8g"/>
                                                 <constraint firstItem="x3E-3T-0wf" firstAttribute="leading" secondItem="8vl-HL-E6z" secondAttribute="leading" constant="10" id="JUY-b3-rZC"/>
+                                                <constraint firstAttribute="trailing" secondItem="SkI-DW-Svn" secondAttribute="trailing" constant="10" id="Nzv-WT-kXM"/>
                                                 <constraint firstAttribute="bottom" secondItem="x3E-3T-0wf" secondAttribute="bottom" constant="10" id="TPU-St-NFt"/>
+                                                <constraint firstItem="SkI-DW-Svn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x3E-3T-0wf" secondAttribute="trailing" constant="8" symbolic="YES" id="UBJ-0S-IGh"/>
                                                 <constraint firstItem="eVF-os-gJj" firstAttribute="leading" secondItem="x3E-3T-0wf" secondAttribute="trailing" constant="15" id="V5U-qk-tbk"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="eVF-os-gJj" secondAttribute="trailing" constant="20" id="agQ-ly-c0o"/>
                                                 <constraint firstItem="x3E-3T-0wf" firstAttribute="top" secondItem="8vl-HL-E6z" secondAttribute="top" constant="10" id="atv-1X-1pS"/>
                                                 <constraint firstItem="VhG-sH-98D" firstAttribute="top" secondItem="8vl-HL-E6z" secondAttribute="topMargin" constant="15" id="ex4-o1-ueJ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="eVF-os-gJj" secondAttribute="bottom" constant="15" id="hVA-1O-E2a"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="eVF-os-gJj" secondAttribute="bottom" constant="14" id="hVA-1O-E2a"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="eVF-os-gJj" secondAttribute="trailing" constant="50" id="lJe-tz-D70"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
@@ -109,6 +120,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="userBirthday" destination="SkI-DW-Svn" id="Sds-pa-fOk"/>
                                             <outlet property="userDepartmentLabel" destination="eVF-os-gJj" id="X0X-Wo-See"/>
                                             <outlet property="userImageView" destination="x3E-3T-0wf" id="Q9C-nK-Smo"/>
                                             <outlet property="userNameLabel" destination="qhi-KD-LCF" id="OUB-vu-Vfw"/>

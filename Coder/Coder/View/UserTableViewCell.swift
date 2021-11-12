@@ -10,6 +10,7 @@ import SkeletonView
 
 class UserTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var userBirthday: UILabel!
     @IBOutlet weak var userTagLabel: UILabel!
     @IBOutlet weak var userDepartmentLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
