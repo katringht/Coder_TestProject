@@ -28,6 +28,7 @@ class MainViewController: UIViewController, UITextFieldDelegate{
         }
     }
     var dataWasLoaded = false
+    var isDataFiltred = false
     private lazy var errorView: ErrorView = {
         let errorV = Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)?.first as? ErrorView
         errorV?.set(title: "Мы никого не нашли", subtitle: "Попробуй скорректировать запрос", myerrorIcon: "magnifyingglass", button: false)
@@ -67,8 +68,11 @@ class MainViewController: UIViewController, UITextFieldDelegate{
             case .Success(let data):
                 if !UserDefaults.standard.bool(forKey: "FILTER") {
                     self?.users = data.sorted(by: { $0.lastName < $1.lastName})
+                    self?.isDataFiltred = false
                 } else {
                     self?.users = data.sorted(by: { (self?.daysUntil(birthday: $0.birthday))! < (self?.daysUntil(birthday: $1.birthday))!})
+                    self?.isDataFiltred = true
+                    
                 }
             case .Error(let message):
                 DispatchQueue.main.async {
@@ -229,6 +233,7 @@ extension MainViewController: SkeletonTableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.cellID, for: indexPath) as! UserTableViewCell
         cell.isSkeletonable = true
         cell.showAnimatedGradientSkeleton()
+        cell.userBirthday.isHidden = true
         let user: User
         if dataWasLoaded == true {
             cell.hideSkeleton()
@@ -252,6 +257,11 @@ extension MainViewController: SkeletonTableViewDataSource {
             cell.userTagLabel.text = user.userTag.lowercased()
             cell.userDepartmentLabel.text = user.position
             cell.userImageView.loadImageUsingUrl(urlString: user.avatarUrl)
+            let birth = user.birthday.replacingOccurrences(of: "-", with: ".")
+            cell.userBirthday.text = String(birth.suffix(5))
+            if isDataFiltred == true {
+                cell.userBirthday.isHidden = false
+            }
             
         }
         return cell
